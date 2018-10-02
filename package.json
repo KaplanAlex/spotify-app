@@ -1,0 +1,33 @@
+{
+  "name": "spotify-app",
+  "version": "1.0.0",
+  "description": "Spotify song saver",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaplanAlex/spotify-app.git"
+  },
+  "author": "Alex Kaplan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaplanAlex/spotify-app/issues"
+  },
+  "homepage": "https://github.com/KaplanAlex/spotify-app#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}

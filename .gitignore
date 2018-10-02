@@ -1,0 +1,4 @@
+node_modules
+
+# Don't push keys for now
+config/keys.js
