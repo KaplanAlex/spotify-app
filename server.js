@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 // Get Mongo config
 const db = require("./config/keys").mongoURI;
@@ -7,6 +8,10 @@ const user = require("./routes/api/user");
 
 // Init express router
 const app = express();
+
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Connect to MongoDB
 mongoose
