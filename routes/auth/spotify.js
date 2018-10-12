@@ -51,35 +51,35 @@ router.get("/callback", (req, res) => {
   const { code, state } = req.query;
   const storedState = req.cookies ? req.cookies[STATE_KEY] : null;
   // Ensure the returned user is the user sent
-  // if (state === null || state !== storedState) {
-  //   res.redirect("/#/error/state mismatch");
-  //   // if the state is valid, get the authorization code and pass it on to the client
-  // } else {
-  res.clearCookie(STATE_KEY);
-  // Retrieve an access token and a refresh token
-  spotifyApi
-    .authorizationCodeGrant(code)
-    .then(data => {
-      const { expires_in, access_token, refresh_token } = data.body;
+  if (state === null || state !== storedState) {
+    res.redirect("/#/error/state mismatch");
+    // if the state is valid, get the authorization code and pass it on to the client
+  } else {
+    res.clearCookie(STATE_KEY);
+    // Retrieve an access token and a refresh token
+    spotifyApi
+      .authorizationCodeGrant(code)
+      .then(data => {
+        const { expires_in, access_token, refresh_token } = data.body;
 
-      // Set the access token on the API object to use it in later calls
-      spotifyApi.setAccessToken(access_token);
-      spotifyApi.setRefreshToken(refresh_token);
+        // Set the access token on the API object to use it in later calls
+        spotifyApi.setAccessToken(access_token);
+        spotifyApi.setRefreshToken(refresh_token);
 
-      // use the access token to access the Spotify Web API
-      spotifyApi.getMe().then(({ body }) => {
-        console.log(body);
+        // use the access token to access the Spotify Web API
+        spotifyApi.getMe().then(({ body }) => {
+          console.log(body);
+        });
+
+        // we can also pass the token to the browser to make requests from there
+        res.redirect(
+          `${FRONT_END}?access_token=${access_token}&refresh_token=${refresh_token}`
+        );
+      })
+      .catch(err => {
+        res.redirect("/#/error/invalid token");
       });
-
-      // we can also pass the token to the browser to make requests from there
-      res.redirect(
-        `${FRONT_END}?access_token=${access_token}&refresh_token=${refresh_token}`
-      );
-    })
-    .catch(err => {
-      res.redirect("/#/error/invalid token");
-    });
-  // }
+  }
 });
 
 module.exports = router;

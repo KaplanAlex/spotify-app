@@ -11,9 +11,12 @@ const spotify_auth = require("./routes/auth/spotify");
 // Init express router
 const app = express();
 
-// Body parser middleware
+// Body parser middleware.
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Cookie parsers to validate spotify redirect.
+app.use(cookieParser());
 
 // Connect to MongoDB
 mongoose
