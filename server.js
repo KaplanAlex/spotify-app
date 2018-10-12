@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 // Get Mongo config
 const db = require("./config/keys").mongoURI;
 const user = require("./routes/api/user");
+const spotify_auth = require("./routes/auth/spotify");
 
 // Init express router
 const app = express();
@@ -27,6 +29,7 @@ app.get("/", (req, res) => res.send("Hello?!"));
 
 // Set express to use the routes
 app.use("/api/user", user);
+app.use("/auth/spotify", spotify_auth);
 
 const port = process.env.PORT || 5000;
 
