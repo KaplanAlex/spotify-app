@@ -35,7 +35,7 @@
     "querystring": "^0.2.0",
     "request": "^2.88.0",
     "spotify-web-api-node": "^4.0.0",
-    "validator": "^10.8.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
